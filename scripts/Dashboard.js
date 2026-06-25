@@ -1,23 +1,7 @@
 const API = "http://localhost:3000"
 // import { appointmentAPI } from "./api.js";
-const today = new Date()
-console.log(today);
-
-// $(document).ready(()=>{
-//     console.log("webapge ready");
-// })
-$('#patientnumber').on("input blur",function(){
-    const value = $(this).val();
-    const numberRegex = /^[6-9]\d{9}$/
-    if(numberRegex.test(value)){
-        $('#numberErrorMsg').text("Correct")
-    }
-    else{
-        $('#numberErrorMsg').text("")
-    }
-})
-
-
+const today = new Date();
+const now = today.toISOString().split('T')[0];
 
 async function addAppointment(){
     try{
