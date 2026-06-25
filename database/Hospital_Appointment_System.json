@@ -1,0 +1,76 @@
+{
+  "doctors": [
+    {
+      "doctor_id": "crd230311",
+      "doctor_name": "Dr.Asok Kumar",
+      "specialization": "Cardiologist",
+      "department": "Cardiology",
+      "id": "qVjd9TFOesY"
+    },
+    {
+      "doctor_id": "ent291101",
+      "doctor_name": "Dr.David James",
+      "specialization": "ENT consultant",
+      "department": "ENT",
+      "id": "KokpyD7hqEo"
+    },
+    {
+      "doctor_id": "neu251220",
+      "doctor_name": "Dr.Sophia Prince",
+      "specialization": "Neurologist",
+      "department": "Neurology",
+      "id": "YNdocJhGW0c"
+    }
+  ],
+  "patients": [],
+  "appointments": [
+    {
+      "assigned_doctor": "AsokKumar",
+      "reason": "Hard to Breathe",
+      "appointment_date": "2026-06-25",
+      "appointment_time": "4:30 PM - 7:00 PM",
+      "status": "Requested",
+      "id": "sAJhAhIRNyo"
+    },
+    {
+      "assigned_doctor": "AsokKumar",
+      "reason": "High Fever",
+      "appointment_date": "2026-06-26",
+      "appointment_time": "9:30 AM - 12:30 AM",
+      "status": "Requested",
+      "id": "J2uIQlTgvnc"
+    },
+    {
+      "assigned_doctor": "DavidJames",
+      "reason": "High Fever",
+      "appointment_date": "2026-06-28",
+      "appointment_time": "1:30 PM - 4:30 PM",
+      "status": "Requested",
+      "id": "f2nvPK0tyTw"
+    },
+    {
+      "assigned_doctor": "DavidJames",
+      "reason": "High Fever",
+      "appointment_date": "2026-06-26",
+      "appointment_time": "9:30 AM - 12:30 AM",
+      "status": "Requested",
+      "id": "mQGPn_30CXg"
+    },
+    {
+      "assigned_doctor": "DavidJames",
+      "reason": "High Fever",
+      "appointment_date": "2026-06-24",
+      "appointment_time": "9:30 AM - 12:30 AM",
+      "status": "Requested",
+      "id": "88q9MvQa-cY"
+    }
+  ],
+  "admin": [
+    {
+      "username": "admin",
+      "password": "password",
+      "id": "Mckvdgp69dI"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

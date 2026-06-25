@@ -1,0 +1,14 @@
+/* *{
+    outline: 1px solid red;
+} */
+.container{
+    height: 100vh;
+}
+
+.loginBgImg{
+    height: 690px !important;
+    /* width: 1520px; */
+}
+#login-cont{
+    height: 100vh;
+}

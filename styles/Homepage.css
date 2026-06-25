@@ -1,0 +1,48 @@
+body {
+    font-family: "Playfair Display", serif;
+}
+#home{
+    height: 90vh;
+}
+#heroBgImg{
+    height:630px;
+    width: 100%;
+    
+}
+#navbar{
+    background-color: #178A90;
+}
+#loginBtn{
+    background-color: #4DC4CB;
+}
+#brandLogo{
+    width: 45px;
+    height: 45px;
+}
+#features{
+    height: 110vh;
+}
+.featureImg{
+    width: 100px;
+    height: 100px;
+}
+#contact{
+    height: 90vh;
+}
+#contactBgImg{
+    width: 100%;
+    height: 500px;
+}
+.contacts{
+    top: 15%;
+    right: 20%;
+    width: 400px;
+}
+/* .heroTeext{
+    top: 10% !important;
+} */
+
+.carouselImage{
+    height: 400px;
+    /* width: ; */
+}

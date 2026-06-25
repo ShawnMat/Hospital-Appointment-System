@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <!-- Fonts -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/Homepage.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top d-flex justify-content-between" id="navbar">
+        <div class="navbar-brand ps-3">
+            <img src="/assets/images/icons/caduceus.png" id="brandLogo">
+            <!-- <p class="fs-5"></p> -->
+        </div>
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="menu">
+            <div class="navbar-nav gap-4">
+                <a class="nav-link active text-white" href="#home">Home</a>
+                <a class="nav-link text-white" href="#features">Features</a>
+                <a class="nav-link text-white" href="#previews">Preview</a>
+                <a class="nav-link text-white" href="#contact">Contact</a>
+            </div>
+        </div>
+        <button class="btn mx-4  text-white" id="loginBtn">Login</button>
+    </nav>
+    <div class="heroArea conatiner-fluid position-relative bg-light" id="home">
+        <img src="/assets/images/background Images/Hero-Background-Image.png" class="img-fluid" id="heroBgImg">
+        <div class="heroText position-absolute top-50 mx-5">
+            <h1 class="fw-bold  m-0">Welcome to Hospital Appointment System</h1>
+            <p class="fs-4 fst-italic">where you can efficiently create and manage appointments</p>
+            <div class="getStartedBtn mt-4 d-flex gap-4 align-items-center">
+                <p>Get started right away</p>
+                <button class="btn bg-primary text-white" id="loginBtn">Login</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid " id="features">
+        <h1 class="my-5 ms-5 ">Features</h1>
+        <div class="row d-flex justify-content-center gap-5 ">
+            <div class="card col-3">
+                <div class="card-header mt-2 d-flex justify-content-center">
+                    <img src="/assets/images/icons/icons8-time-50.png" class="featureImg rounded-3 ">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title ">Timely Consulting</h4>
+                    <p class="fst-italic">Our website helps staffs create, update, and modify appointments with just one click!</p>
+                </div>
+            </div>
+            <div class="card col-3">
+                <div class="card-header mt-2 d-flex justify-content-center">
+                    <img src="/assets/images/icons/icons8-tasks-64.png" class="featureImg rounded-3 ">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title ">Book Appointment</h4>
+                    <p class="fst-italic">Our website helps staffs create, update, and modify appointments with just one click!</p>
+                </div>
+            </div>
+            <div class="card col-3">
+                <div class="card-header mt-2 d-flex justify-content-center">
+                    <img src="/assets/images/icons/icons8-find-100.png" class="featureImg rounded-3 ">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title ">Find Doctors</h4>
+                    <p class="fst-italic">Our website helps staffs create, update, and modify appointments with just one click!</p>
+                </div>
+            </div>
+            <div class="card col-3">
+                <div class="card-header mt-2 d-flex justify-content-center">
+                    <img src="/assets/images/icons/icons8-statistics-48.png" class="featureImg rounded-3 ">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title ">Statistics</h4>
+                    <p class="fst-italic">Our website helps staffs create, update, and modify appointments with just one click!</p>
+                </div>
+            </div>
+            <div class="card col-3">
+                <div class="card-header mt-2 d-flex justify-content-center">
+                    <img src="/assets/images/icons/icons8-last-24-hours-48.png" class="featureImg rounded-3 ">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="card-title ">Available 24/7</h4>
+                    <p class="fst-italic">Our website helps staffs create, update, and modify appointments with just one click!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel -->
+    <h1 class="my-5 ms-5 " id="previews">Dashboard Preview</h1>
+    <div class="container d-flex justify-content-center ">
+        <div class="carousel slide" id="dashboardImagesCarousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/assets/images/images/1981-digital-bMWHu8wU1Vk-unsplash.jpg" class=" carouselImage d-block" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="/assets/images/images/luke-chesser-JKUTrJ4vK00-unsplash.jpg" class=" carouselImage d-block" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="/assets/images/images/path-digital-tR0jvlsmCuQ-unsplash.jpg" class=" carouselImage d-block" alt="">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#dashboardImagesCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#dashboardImagesCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+     <!-- Contacts -->
+    <h1 class="my-5 ms-5">Get in Touch</h1>
+    <div class="container" id="contact">
+        <div class="row contacts d-flex-wrap justify-content-center w-100 gap-5">
+            <div class="col-5">
+                <p class="fs-3">Email</p>
+                <p>company12@gmail.com</p>
+                <p class="fs-3">Address</p>
+                <p>171, Mettupalayam Rd, Kuppakonam Pudur, Coimbatore, Tamil Nadu 641043</p>
+                <p class="fs-3">Follow us on</p>
+                <div class="follow-cont d-flex gap-4">
+                    <i class="bi bi-linkedin"></i>
+                    <i class="bi bi-github"></i>
+                    <i class="bi bi-instagram"></i>
+                </div>
+            </div>
+            <div class="col-5">
+                <form class="p-3 d-flex flex-column bg-light rounded-3">
+                    <!-- <h4 class="mb-3 text-center">Say Hi</h4> -->
+                    <label for="name" class="mb-2 fs-4 form-label">Your Name</label>
+                    <input type="text" name="name" id="name" placeholder="What should we call you?" class="p-1 rounded-2 border-1 mb-2 form-control">
+                    <label for="emailId" class=" fs-4 mb-2 form-label">Your Email</label>
+                    <input type="email" name="email" id="emailId" placeholder="Where can we address you?" class="p-1 rounded-2 border-1 mb-2 form-control">
+                    <label for="msg" class="mb-2 fs-4 form-label">Message</label>
+                    <textarea type="text" name="message" id="msg" placeholder="Enter your Message" class="p-1 rounded-2 border-1 form-control"></textarea>
+                    <div class="sendBtn d-flex justify-content-center mt-3">
+                        <button class="btn bg-primary w-50 text-white" type="button">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-primary d-flex justify-content-center">
+        <p class="text-white">@ Support us by Using our product</p>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/scripts/Login.js"></script> -->
+</body>
+</html>

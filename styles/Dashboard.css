@@ -1,0 +1,77 @@
+/* 
+DARK GREEN - 0B3D40
+DARK MINT GREEN - 0F5C61
+LIGHTER SADE DARK MINT GREEN - 178A90 (HOSPITAL MASK COLOR)
+LIGHT MINT GREEN - 4DC4CB 
+VERY LIGHT MINT GREEN - D6F3F5
+LIGHT GREEN + WHITE  EEF9FA
+CREAM - F7F4EF
+
+*/
+/* *{
+    outline: 1px solid red;
+} */
+body{
+    background-color: #f7f4ef;
+    font-family: "inter",serif;
+}
+#navbar{
+    background: #178A90 ;
+}
+.counters{
+    background-color: #4DC4CB;
+    height: 40px;
+}
+#workArea{
+    background-color: #EEF9FA;
+}
+#sidebar{
+    background-color: #178A90;
+    height: 96vh;
+}
+#personalDetails{
+    display: block;
+}
+/* #appointmentDetails{
+    display: none;
+} */
+
+#brandLogo{
+    width: 45px;
+    height: 45px;
+}
+#workspaceDashboard{
+    /* display: none; */
+}
+#workspaceProfile{
+    display: none;
+}
+.profilePicture{
+    width: 200px;
+    height: 200px;
+}
+#profileImageBorder{
+    width: 230px;
+    height: 230px;
+    background-color: #178A90;
+    top: 22%
+}
+.backgroundProfileImage{
+    width: 1255px;
+    height: 300px;
+}
+
+/* Modal Styles */
+.modal-header{
+    background-color: #D6F3F5;
+}
+.modal-footer{
+    background-color: #D6F3F5;
+}
+#createBtn{
+    background-color: #178A90 ;
+}
+
+.errorMsg{
+    color: red;
+}
