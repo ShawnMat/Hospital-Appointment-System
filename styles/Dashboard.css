@@ -61,6 +61,18 @@ body{
     height: 300px;
 }
 
+/* .filter-contents{
+    width: 0px;
+    height: 41px;
+    overflow: hidden;
+    transition: 2 ease-in;
+    transform: translateX(10%);
+}
+.filter-contents.show{
+    max-width: 200px;
+    display: block;
+} */
+
 /* Modal Styles */
 .modal-header{
     background-color: #D6F3F5;
@@ -70,6 +82,10 @@ body{
 }
 #createBtn{
     background-color: #178A90 ;
+}
+#modalEditBtn{
+    background-color: #178A90 ;
+
 }
 
 .errorMsg{

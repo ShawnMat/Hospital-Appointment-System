@@ -52,7 +52,7 @@
                         <i class="bi bi-list-task fs-4 text-white"></i>
                     </button>
                     <button class="report btn d-flex justify-content-around gap-5 w-100" type="button">
-                        <p class="fs-5 text-white">Report</p>
+                        <p class="fs-5 text-white">Appointments</p>
                         <i class="bi bi-file-earmark-bar-graph fs-4 text-white"></i>
                     </button>
                     <button class="calendar btn d-flex justify-content-around gap-4 w-100" type="button">
@@ -84,7 +84,7 @@
                     <div class="navbar-nav">
                         <div class="navbar-item d-flex gap-3">
                             <i class="bi bi-search"></i>
-                            <input type="search" class="rounded-pill border-0 px-3" placeholder="Search">
+                            <input type="search" class="rounded-pill border-0 px-3" id="search" placeholder="Search">
                         </div>
                     </div>
                 </nav>
@@ -94,31 +94,42 @@
                         <div class="row d-flex-wrap justify-content-center gap-5 ">
                             <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
                                 <h5 class="m-0">Visited</h5>
-                                <p class="fw-bold" id="visitedCount">1</p>
+                                <p class="fw-bold" id="visitedCount"></p>
                             </div>
                             <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
                                 <h5 class="fs-5">Appointed</h5>
-                                <p class="fw-bold" id="appointedCount">1</p>
+                                <p class="fw-bold" id="appointedCount"></p>
                             </div>
                             <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
                                 <h5 class="fs-5">Requests</h5>
-                                <p class="fw-bold" id="requestedCount">1</p>
+                                <p class="fw-bold" id="requestedCount"></p>
                             </div>
                             <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
                                 <h5 class="fs-5">Missed</h5>
-                                <p class="fw-bold" id="missedCount">1</p>
+                                <p class="fw-bold" id="missedCount"></p>
                             </div>
                         </div>
                     </div>
                     <div class="container-fluid bg-light mt-3">
                         <div class="d-flex justify-content-between  gap-3 p-2">
-                            <h4 class="mx-2 my-2">All Appointments</h4>
+                            <h4 class="mx-2 my-2">My Requests</h4>
                             <div class="tools d-flex gap-3">
                                 <!-- <select name="Status" class="">
                                     <option value="">Filter</option>
                                     <option value="">Created Date</option>
                                 </select> -->
-                                <button class="btn" id="filter">
+                                <!-- <div class="filter-contents d-flex align-content-center gap-2 bg-danger m-1 p-1 rounded-1">
+                                    <button class="btn bg-light" id="status">
+                                        <p class="m-0">Status</p>
+                                    </button>
+                                    <button class="btn bg-light" id="doc">
+                                        <p class="m-0">Doctor</p>
+                                    </button>
+                                    <button class="btn bg-light" id="createdDate">
+                                        <p class="m-0">Created Date</p>
+                                    </button>
+                                </div> -->
+                                <button class="btn" id="filter" >
                                     <i class="bi bi-funnel"></i>
                                 </button>
                                 <button class="btn" id="sort">
@@ -136,10 +147,11 @@
                                     <tr>
                                         <th>S.no</th>
                                         <th>Purpose</th>
-                                        <th>Doctor Name</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
+                                        <th>Preferred Doctor</th>
+                                        <th>Preferred Date</th>
+                                        <th>Preferred Time</th>
                                         <th>Status</th>
+                                        <th>Token</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -224,6 +236,109 @@
                 <div class="modal-footer">
                     <div class="btn-cont m-3">
                         <button class="btn  text-white" type="button" id="createBtn">Request</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Edit Appointment Modal -->
+    <div class="modal fade" id="editAppointmentModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="fs-4">Edit Requested Appointment</p>
+                    <button class="btn-close" data-bs-toggle="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentDetails">
+                        <!-- Reason should come with options lke FEVER, COLD, EMERGENCY, CHEST PAIN, FRACTURE, CHECK-UP ETC -->
+                        <label for="editReason" class="form-label">Reason</label>
+                        <input type="text" class="form-control" id="editReason" placeholder="Enter Reason for visit">
+                        <p id="reasonError" class="errorMsg"></p>
+                        <div class="doctors">
+                            <p class="m-1">Doctors</p>
+                            <select id="editDoctors" class="mb-2">
+                                <option disabled selected>Select Doctor</option>
+                                <option value="AsokKumar">Dr.Asok Kumar</option>
+                                <option value="DavidJames">Dr.David James</option>
+                                <option value="SophiaPrince">Dr.Sophia Prince</option>
+                            </select>
+                            <p id="doctorError" class="errorMsg"></p>
+                        </div>
+                        <label for="editAppointedDate" class="form-label">Preffered Appointment Date</label>
+                        <input type="date" class="form-control" id="editAppointedDate" placeholder="Enter Appointment Date">
+                        <p class="errorMsg" id="dateError"></p>
+                        <div class="appointedTime">
+                            <!-- inline date filter has not been done yet -->
+                            <p class="m-1">Preffered Appointment Time</p>
+                            <select id="editTime" class="mb-2">
+                                <option disabled selected value="selectTime">Select Time</option>
+                                <option>9:30 AM - 12:30 AM</option>
+                                <option>1:30 PM - 4:30 PM</option>
+                                <option>4:30 PM - 7:00 PM</option>
+                            </select>
+                        </div>
+                        <p class="errorMsg" id="timeError"></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-cont m-3">
+                        <button class="btn  text-white" type="button" id="modalEditBtn">Edit Request</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div class="modal fade" id="filterAppointmentModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="fs-4">Re</p>
+                    <button class="btn-close" data-bs-toggle="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentDetails">
+                        <!-- Reason should come with options lke FEVER, COLD, EMERGENCY, CHEST PAIN, FRACTURE, CHECK-UP ETC -->
+                        <label for="editReason" class="form-label">Reason</label>
+                        <input type="text" class="form-control" id="editReason" placeholder="Enter Reason for visit">
+                        <p id="reasonError" class="errorMsg"></p>
+                        <div class="doctors">
+                            <p class="m-1">Doctors</p>
+                            <select id="editDoctors" class="mb-2">
+                                <option disabled selected>Select Doctor</option>
+                                <option value="AsokKumar">Dr.Asok Kumar</option>
+                                <option value="DavidJames">Dr.David James</option>
+                                <option value="SophiaPrince">Dr.Sophia Prince</option>
+                            </select>
+                            <p id="doctorError" class="errorMsg"></p>
+                        </div>
+                        <label for="editAppointedDate" class="form-label">Preffered Appointment Date</label>
+                        <input type="date" class="form-control" id="editAppointedDate" placeholder="Enter Appointment Date">
+                        <p class="errorMsg" id="dateError"></p>
+                        <div class="appointedTime">
+                            <!-- inline date filter has not been done yet -->
+                            <p class="m-1">Preffered Appointment Time</p>
+                            <select id="editTime" class="mb-2">
+                                <option disabled selected value="selectTime">Select Time</option>
+                                <option>9:30 AM - 12:30 AM</option>
+                                <option>1:30 PM - 4:30 PM</option>
+                                <option>4:30 PM - 7:00 PM</option>
+                            </select>
+                        </div>
+                        <p class="errorMsg" id="timeError"></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-cont m-3">
+                        <button class="btn  text-white" type="button" id="modalEditBtn">Edit Request</button>
                     </div>
                 </div>
                 
