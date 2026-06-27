@@ -75,9 +75,8 @@ async function getAppointments(){
 }
 
 function showAppointments(data){
-    // e.preventDefault()
-    // $('#workspace').text(" ")
-        data.forEach(appointments=>{
+    $('#table-content').empty()
+        data.reverse().forEach(appointments=>{
             // allAppointments.push(appointments)
             if(appointments.isDeleted == false){
                 $('#table-content').append(`
@@ -90,7 +89,7 @@ function showAppointments(data){
                                     <td>${appointments.appointment_time}</td>
                                     <!-- <td>${appointments.status}</td> -->
                                     <td><span class="status">${appointments.status}</span></td>
-                                    <td>Not Assigned</td>
+                                    <td>${appointments.TokenNumber}</td>
                                     <td>
                                         <button id="editBtn" class="btn" onclick="editAppointments('${appointments.id}')">
                                             <i class="bi bi-pencil-square"></i>
@@ -137,8 +136,6 @@ async function counters(){
 
 
 async function deleteAppointments(id){
-    const task = await fetch(`${API}/appointments/${id}`)
-    const data = await task.json()
     await fetch(`${API}/appointments/${id}`,{
         method: "PATCH",
         headers:{
@@ -149,6 +146,7 @@ async function deleteAppointments(id){
         }
         )
     })
+    getAppointments();
 }
 
 async function editAppointments(id){
@@ -184,6 +182,8 @@ async function updateAppointments(){
         },
         body: JSON.stringify(appointmentData)
     })
+    getAppointments();
+
 }
 
 
@@ -208,6 +208,8 @@ async function filterAppointments(){
     })
 
     function showFilterAppointments(values){
+        let sno = 1;
+    
         $('#table-content').empty()
         $('#table-content').append(`
                                 <tr>
@@ -229,6 +231,7 @@ async function filterAppointments(){
                                     </td>
                                 </tr>
         `)
+        sno += 1
     }    
 }
 
@@ -248,7 +251,7 @@ $('#appointedDate').attr('min',now)
 // })
 
 $('#filter').click(()=>{
-    $('#filter-contents').addClass('show')
+    $('.filterContents').toggleClass('show')
 })
 
 

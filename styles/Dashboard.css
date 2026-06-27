@@ -61,17 +61,18 @@ body{
     height: 300px;
 }
 
-/* .filter-contents{
-    width: 0px;
+.filterContents{
+    /* width: 0px; */
     height: 41px;
     overflow: hidden;
-    transition: 2 ease-in;
-    transform: translateX(10%);
+    transition: 0.4 all ease;
+    /* transform: translateX(10%); */
 }
-.filter-contents.show{
+.filterContents.show{
     max-width: 200px;
-    display: block;
-} */
+    opacity: 1;
+    /* display: block; */
+}
 
 /* Modal Styles */
 .modal-header{

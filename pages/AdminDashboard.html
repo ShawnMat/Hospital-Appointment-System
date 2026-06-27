@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Admin Dashboard</title>
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,8 +55,8 @@
                         <p class="fs-5 text-white">Appointment Requests</p>
                         <i class="bi bi-file-earmark-bar-graph fs-4 text-white"></i>
                     </button>
-                    <button class="calendar btn d-flex justify-content-around gap-4 w-100" type="button">
-                        <p class="fs-5 text-white">Tokens</p>
+                    <button class="appointments btn d-flex justify-content-around gap-4 w-100" type="button">
+                        <p class="fs-5 text-white">Appointments</p>
                         <i class="bi bi-calendar2-event fs-4 text-white"></i>
                     </button>
                     <button class="profile btn d-flex justify-content-around gap-4 w-100" type="button">
@@ -89,7 +89,7 @@
                     </div>
                 </nav>
                 <!-- Workspace 1 (Dashboard) -->
-                <div id="workspaceDashboard" class="d-none">
+                <div id="workspaceDashboard" class="">
                     <div class="container-fluid p-4">
                         <div class="row d-flex-wrap justify-content-center gap-5 ">
                             <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
@@ -118,24 +118,42 @@
                                     <option value="">Filter</option>
                                     <option value="">Created Date</option>
                                 </select> -->
-                                <button class="btn" id="filter">
-                                    <i class="bi bi-funnel"></i>
-                                </button>
-                                <button class="btn" id="sort">
-                                    <i class="bi bi-sort-alpha-up" id="ascending"></i>
-                                    <i class="bi bi-sort-alpha-up-alt visually-hidden" id="descending"></i>
-                                </button>
-                                <button id="addAppointment" class="btn" data-bs-toggle="modal" data-bs-target="#createAppointmentModal">
-                                    <i class="bi bi-plus-square fs-4"></i>
-                                </button>
+                                <div class="filters d-flex gap-2">
+                                    <!-- <button class="btn bg-primary text-white" id="filter">
+                                        <i class="bi bi-funnel"></i>
+                                        Apply Filter
+                                    </button> -->
+                                    <select id="statusFilter" class="form-select">
+                                        <option disabled selected>Choose Status</option>
+                                        <option value="Visited">Visited</option>
+                                        <option value="Appointed">Appointed</option>
+                                        <option value="Requested">Requested</option>
+                                        <option value="Missed">Missed</option>
+                                    </select>
+                                    <select id="doctorFilter" class="form-select">
+                                        <option disabled selected>Choose Doctor</option>
+                                        <option value="AsokKumar">Dr. Asok Kumar</option>
+                                        <option value="DavidJames">Dr. David James</option>
+                                        <option value="SophiaPrince">Dr. Sophia Prince</option>
+                                    </select>
+                                    <!-- <select id="doctorFilter" class="form-select">
+                                        <option disabled selected>Choose Doctor</option>
+                                        <option value="">Dr. AsokKumar</option>
+                                        <option value="">Dr. DavidJames</option>
+                                        <option value="">Dr. SophiaPrince</option>
+                                    </select>
+                                    <input type="date" name="craetedDate" id="createdDateFilter" class="form-control"> -->
+                                </div>
                             </div>
                         </div>
                         <div class="mb-3 p-3" id="workArea">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>S.no</th>
-                                        <!-- <th>Patient Name</th> -->
+                                        <th>Token</th>
+                                        <th>Patient Name</th>
+                                        <th>Patient Age</th>
+                                        <th>Patient Gender</th>
                                         <th>Purpose</th>
                                         <th>Doctor Name</th>
                                         <th>Date</th>
@@ -144,7 +162,7 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody id="table-content">
+                                <tbody id="tableContent">
                                 </tbody>
                             </table>
                         </div>
@@ -152,7 +170,7 @@
                 </div>
 
                 <!-- Profile Section -->
-                <div id="workspaceProfile">
+                <div id="workspaceProfile" class="">
                     <div class="container">
                         <h1>Profile</h1>
                         <div class="rounded-circle ms-5 d-flex justify-content-center align-items-center" id="profileImageBorder">
@@ -170,7 +188,7 @@
                 </div>
 
                 <!-- Request Section -->
-                <div id="workspaceRequest">
+                <div id="workspaceRequest" class="d-none">
                     <div class="container-fluid bg-light mt-3">
                         <div class="d-flex justify-content-between  gap-3 p-2">
                             <h4 class="mx-2 my-2">All Incoming Request</h4>
@@ -179,13 +197,36 @@
                                     <option value="">Filter</option>
                                     <option value="">Created Date</option>
                                 </select> -->
-                                <button class="btn" id="filter">
-                                    <i class="bi bi-funnel"></i>
-                                </button>
-                                <button class="btn" id="sort">
+                                <div class="filters d-flex gap-2">
+                                    
+                                    <select id="statusFilter" class="form-select">
+                                        <option disabled selected>Choose Status</option>
+                                        <option value="Visited">Visited</option>
+                                        <option value="Appointed">Appointed</option>
+                                        <option value="Requested">Requested</option>
+                                        <option value="Missed">Missed</option>
+                                    </select>
+                                    <select id="doctorFilter" class="form-select">
+                                        <option disabled selected>Choose Doctor</option>
+                                        <option value="AsokKumar">Dr. Asok Kumar</option>
+                                        <option value="DavidJames">Dr. David James</option>
+                                        <option value="SophiaPrince">Dr. Sophia Prince</option>
+                                    </select>
+                                    <!-- <select id="doctorFilter" class="form-select">
+                                        <option disabled selected>Choose Doctor</option>
+                                        <option value="">Dr. AsokKumar</option>
+                                        <option value="">Dr. DavidJames</option>
+                                        <option value="">Dr. SophiaPrince</option>
+                                    </select>
+                                    <input type="date" name="craetedDate" id="createdDateFilter" class="form-control"> -->
+                                </div>
+
+
+                                
+                                <!-- <button class="btn" id="sort">
                                     <i class="bi bi-sort-alpha-up" id="ascending"></i>
                                     <i class="bi bi-sort-alpha-up-alt visually-hidden" id="descending"></i>
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                         <div class="mb-3 p-3" id="workArea">

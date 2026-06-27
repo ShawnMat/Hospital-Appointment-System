@@ -56,6 +56,13 @@ body{
     background-color: #178A90; 
 }
 
+#filter{
+    width:150px ;
+}
+
+#statusFilter{
+    width: 200px;
+}
 /* #workspaceRequest{
 
 } */

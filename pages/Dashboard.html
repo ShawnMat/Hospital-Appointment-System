@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Patient Dashboard</title>
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,24 +118,29 @@
                                     <option value="">Filter</option>
                                     <option value="">Created Date</option>
                                 </select> -->
-                                <!-- <div class="filter-contents d-flex align-content-center gap-2 bg-danger m-1 p-1 rounded-1">
-                                    <button class="btn bg-light" id="status">
-                                        <p class="m-0">Status</p>
-                                    </button>
-                                    <button class="btn bg-light" id="doc">
-                                        <p class="m-0">Doctor</p>
-                                    </button>
-                                    <button class="btn bg-light" id="createdDate">
-                                        <p class="m-0">Created Date</p>
-                                    </button>
-                                </div> -->
+                                <div class="filters d-flex gap-2">
+                                    <select name="Status" class="form-select">
+                                        <option disabled selected>Choose Status</option>
+                                        <option value="">Visited</option>
+                                        <option value="">Appointed</option>
+                                        <option value="">Missed</option>
+                                        <option value="">Requested</option>
+                                    </select>
+                                    <select name="doctor" class="form-select">
+                                        <option disabled selected>Choose Doctor</option>
+                                        <option value="">Dr. AsokKumar</option>
+                                        <option value="">Dr. David James</option>
+                                        <option value="">Dr. SophiaPrince</option>
+                                    </select>
+                                    <input type="date" class="form-control" name="createdDate">
+                                </div>
                                 <button class="btn" id="filter" >
                                     <i class="bi bi-funnel"></i>
                                 </button>
-                                <button class="btn" id="sort">
+                                <!-- <button class="btn" id="sort">
                                     <i class="bi bi-sort-alpha-up" id="ascending"></i>
                                     <i class="bi bi-sort-alpha-up-alt visually-hidden" id="descending"></i>
-                                </button>
+                                </button> -->
                                 <button id="addAppointment" class="btn" data-bs-toggle="modal" data-bs-target="#createAppointmentModal">
                                     <i class="bi bi-plus-square fs-4"></i>
                                 </button>
