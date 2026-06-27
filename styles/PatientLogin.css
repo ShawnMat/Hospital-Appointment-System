@@ -1,0 +1,30 @@
+body{
+    overflow: hidden;
+    font-family: "inter",serif;
+
+}
+
+
+#loginImage{
+    padding: 0;
+    height: 100%;
+}
+#loginArea{
+    background: linear-gradient(120deg,#659287,#88BDA4,#B1D3B9,#E6F2DD);
+}
+
+#loginBtn{
+    background-color: #659287;
+}
+
+#loginHeading{
+    /* letter-spacing: 2px; */
+    font-weight: bold;
+}
+label{
+    font-weight: 600;
+}
+
+.error{
+    color: red;
+}

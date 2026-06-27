@@ -1,5 +1,12 @@
 const API = "http://localhost:3000"
 const today = new Date().toISOString().split('T')[0];
+const loggedInUser = JSON.parse(
+    localStorage.getItem('loggedInUser')
+)
+
+if (!loggedInUser) {
+    window.location.replace('/pages/AdminLogin.html')
+}
 // need to add localstorage
 
 
@@ -276,5 +283,8 @@ $('#doctorFilter').change(async function(){
 // $("#filters").on("input",{
 //     const status = $(this).val()
 // })
-
+$('#logoutBtn').click(function () {
+    localStorage.clear()
+    window.location.replace('/pages/Login.html');
+});
 getAppointments()

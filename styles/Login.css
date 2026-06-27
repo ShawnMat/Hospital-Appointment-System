@@ -1,18 +1,25 @@
-/* *{
-    outline: 1px solid red;
-} */
-.container{
-    height: 100vh;
+body{
+    font-family: "inter",serif;
 }
 
-.loginBgImg{
-    height: 690px !important;
-    /* width: 1520px; */
-}
-#login-cont{
-    height: 100vh;
+#adminLoginArea{
+    background: linear-gradient(#3674B5,#578FCA,#A1E3F9,#D1F8EF);
 }
 
-/* #loginContainter{
-    height: 500px !important;
-} */
+#adminLoginImage{
+    height: 695px;
+    width: 100%;
+}
+#adminLoginBtn{
+    background-color: #578FCA;
+}
+#adminLoginHeading{
+    font-weight: bold;
+}
+label{
+    font-weight: 600;
+}
+
+.error{
+    color: red;
+}

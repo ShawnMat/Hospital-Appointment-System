@@ -4,26 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Register</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+    <!-- Login CSS File -->
+    <link rel="stylesheet" href="/styles/PatientRegister.css">
 </head>
 <body>
-    <div class="container d-flex justify-content-center align-items-center">
-        <form class="">
-            <div class="personDetails d-flex flex-column gap-3">
-                <div id="firstname">
-                    <label for="firstName">First Name</label>
-                    <input type="text" name="firstName" id="firstName">
-                </div>
-                <div class="middlename">
-                    <label for="middleName">Middle Name</label>
-                    <input type="text" name="middleName" id="middleName">
-                </div>
-                <div class="lastname">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" name="lastName" id="lastName">
-                </div>
+    <div class="container-fluid d-flex" id="loginContainer">
+        <div class="row">
+            <div id="image" class="col-4 p-0">
+                <img src="/assets/images/background Images/RegisterPageImage.jpg" class="img-fluid" id="registerImage">
             </div>
-        </form>
+            <div class="col-8 d-flex flex-column justify-content-center align-items-center" id="registerArea">
+                <form class="row rounded-2 p-3" id="loginForm">
+                    <h3 id="registerHeading">REGISTER</h3>
+                    <div class="firstNameContainer col-4">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter your First Name">
+                        <p id="fnameError" class="errorMsg"></p>
+                    </div>
+                    <div class="middleNameContainer col-4">
+                        <label for="middleName" class="form-label">Middle Name</label>
+                        <input type="text" class="form-control" id="middleName" placeholder="Enter your Middle Name">
+                        <p id="phoneNumberError" class="errorMsg"></p>
+                    </div>
+                    <div class="lastNameContainer col-4">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter your Last Name">
+                        <p id="phoneNumberError" class="errorMsg"></p>
+                    </div>
+                    <div class="genderContainer d-flex gap-3 flex-column col-4">
+                        <label class="form-check-label">Gender</label>
+                        <div class="genderInputs d-flex gap-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="male">
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                             <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="female">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                             <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="other">
+                                <label class="form-check-label" for="other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ageContainer col-4">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" placeholder="Enter your Age">
+                        <p id="ageError" class="errorMsg"></p>
+                    </div>
+                    <div class="emailIDContainer col-4">
+                        <label for="emailID" class="form-label">EmailID</label>
+                        <input type="email" class="form-control" id="emailID" placeholder="Enter your Email ID">
+                        <p id="emailIDError" class="errorMsg"></p>
+                    </div>
+                    <div class="phoneNumberContainer col-6">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="number" class="form-control" id="phoneNumber" placeholder="Enter your Phone Number">
+                        <p id="phoneNumberError" class="errorMsg"></p>
+                    </div>
+                    <div class="addressContainer col-6">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea id="address" class="form-control" placeholder="Enter your Address"></textarea>
+                        
+                    </div>
+                    <div class="usernameContainer col-4">
+                        <label for="user" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="user" placeholder="Enter your Username">
+                        <p id="usernameError" class="errorMsg"></p>
+                    </div>
+                    <div class="passwordContainer col-4">
+                        <label for="pwd" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Create a Password">
+                        <p id="passwordError" class="errorMsg"></p>
+                    </div>
+                    <div class="confirmPasswordContainer col-4">
+                        <label for="confirmPwd" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPwd" placeholder="Confirm your new Password">
+                        <p id="confirmPasswordError" class="errorMsg"></p>
+                    </div>
+                    <div class="col-12 d-flex align-items-center flex-column gap-3" id="registerBtnContainer">
+                        <button  class="btn text-white w-50" id="registerBtn">Register</button>
+                        <div class="existingUser d-flex gap-3">
+                            <p>Already Registered?</p>
+                            <a href="/pages/PatientLogin.html" class="text-decoration-none">Login Here</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/PatientRegister.js"></script>
 </body>
 </html>

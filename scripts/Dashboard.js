@@ -1,5 +1,12 @@
 const API = "http://localhost:3000"
 // import { appointmentAPI } from "./api.js";
+const loggedInUser = JSON.parse(
+    localStorage.getItem('loggedInUser')
+)
+
+if (!loggedInUser) {
+    window.location.replace('/pages/Patientlogin.html')
+}
 const today = new Date();
 const now = today.toISOString().split('T')[0];
 // sampleDate = "2026/"
@@ -254,6 +261,10 @@ $('#filter').click(()=>{
     $('.filterContents').toggleClass('show')
 })
 
+$('#logoutBtn').click(function () {
+    localStorage.clear()
+    window.location.replace('/pages/PatientLogin.html');
 
+});
 
 getAppointments()

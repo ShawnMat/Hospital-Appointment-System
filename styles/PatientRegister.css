@@ -1,0 +1,35 @@
+body{
+    overflow: hidden;
+    font-family: "inter",serif;
+}
+#loginContainer{
+    width: 100vw;
+    height: 100vh;
+}
+#registerImage{
+    padding: 0;
+    height: 100%;
+}
+#registerArea{
+    background: linear-gradient(120deg,#659287,#88BDA4,#B1D3B9,#E6F2DD);
+}
+#registerBtn{
+    background-color: #659287;
+}
+#loginForm{
+    /* background-color: #eaede8 ; */
+    background-color: white ;
+    width: 900px;
+    height: 600px;
+}
+#registerHeading{
+    /* letter-spacing: 2px; */
+    font-weight: bold;
+}
+label{
+    font-weight: 600;
+}
+
+.error{
+    color: red !important;
+}
