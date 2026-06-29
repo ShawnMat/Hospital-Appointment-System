@@ -24,6 +24,12 @@ body{
 }
 #workArea{
     background-color: #EEF9FA;
+    height: 425px !important;
+    overflow-y: auto !important;
+}
+.table{
+    height: 200px !important;
+    overflow-y: auto !important;
 }
 #sidebar{
     background-color: #178A90;
@@ -43,9 +49,7 @@ body{
 #workspaceDashboard{
     /* display: none; */
 }
-#workspaceProfile{
-    display: none;
-}
+
 .profilePicture{
     width: 200px;
     height: 200px;
@@ -67,4 +71,50 @@ body{
 
 } */
 
+/* #workspaceDashboard{
+    display: none;
+} */
+.workspaceAppointments{
+    display: none ;
+}
+.workSpaceRequests{
+    display: none ;
+}
+.notSeen{
+    display: none !important;
+}
 
+.seen{
+    display: block !important;
+}
+
+
+#sidebar{
+    background-color: #178A90;
+    min-height: 100vh;
+}
+
+#brandLogo{
+    width: 45px;
+    height: 45px;
+}
+
+.menu button{
+    transition: 0.3s;
+}
+
+.menu button:hover{
+    background-color: rgba(255,255,255,0.15);
+}
+
+@media (max-width: 991px){
+
+    #sidebar{
+        width: 280px !important;
+        min-height: 100vh;
+    }
+
+    .menu button{
+        justify-content: flex-start;
+    }
+}

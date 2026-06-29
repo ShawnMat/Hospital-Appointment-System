@@ -16,180 +16,292 @@
     <link rel="stylesheet" href="/styles/Dashboard.css">
 </head>
 <body>
-        <!-- <nav class="navbar navbar-expand-lg d-flex justify-content-around rounded-pill" id="navbar">
-            <div class="container-fluid brand"> 
-                <a href="" class="navbar-brand text-white">Welcome</a>
-                <button class="navbar-toggler" data-bs-toggle = "collapse" data-bs-target = "#menu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="container">
-                <input type="search" class="w-50 border-0 rounded-5">
-            </div>
-            <div class="collapse navbar-collapse">
-                <div class="navabr-nav">
-                    <div class="navbar-item mx-0">
-                        <a href="" class="navbar-link-active text-decoration-none">Home</a>
-                        <button id="addAppointment" class="btn text-white" data-bs-toggle="modal" data-bs-target="#createAppointmentModal">
-                            <i class="bi bi-plus-square fs-4"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav> -->
+        <!-- SideBar -->
         <div class="row">
             <div class="col-2 rounded-1 mt-2 px-3 pt-3 d-flex flex-column justify-content-between" id="sidebar">
                 <div class="brand  d-flex justify-content-around">
                     <img src="/assets/images/logos/Hospital Logo.svg" id="brandLogo">
                     <div class="brand-cont ">
-                        <p class="text-white fs-4">Brand Name</p>
-                        <small class="fst-italic text-white">Patient Dashboard</small>
+                        <p class="text-white fs-4">Appoint Care</p>
+                        
                     </div>
                 </div>
                 <div class="container menu d-flex flex-column justify-content-between gap-3">
                     <button class="dashboard btn d-flex justify-content-around gap-4 w-100" type="button">
-                        <p class="fs-5 text-white">Dashboard</p>
                         <i class="bi bi-list-task fs-4 text-white"></i>
+                        <p class="fs-5 text-white">Dashboard</p>
                     </button>
-                    <button class="report btn d-flex justify-content-around gap-5 w-100" type="button">
-                        <p class="fs-5 text-white">Appointments</p>
+                    <button class="upcomingAppointmentDetails btn d-flex justify-content-around gap-5 w-100" type="button">
                         <i class="bi bi-file-earmark-bar-graph fs-4 text-white"></i>
+                        <p class="fs-5 text-white">Appointments</p>
                     </button>
-                    <button class="calendar btn d-flex justify-content-around gap-4 w-100" type="button">
-                        <p class="fs-5 text-white">Requests</p>
+                    <button class="request btn d-flex justify-content-around gap-4 w-100" type="button">
                         <i class="bi bi-calendar2-event fs-4 text-white"></i>
+                        <p class="fs-5 text-white">Requests</p>
                     </button>
                     <button class="profile btn d-flex justify-content-around gap-4 w-100" type="button">
-                        <p class="fs-5 text-white">Profile</p>
                         <i class="bi bi-person-square fs-4 text-white"></i>
+                        <p class="fs-5 text-white">Profile</p>
                     </button>
                 </div>
                 <div class="Logout">
                     <button id="logoutBtn" class="btn d-flex justify-content-around gap-4 w-100 mb-3 align-items-center bg-danger" type="button">
-                        <p class="fs-5 m-0 text-white">Logout</p>
                         <i class="bi bi-box-arrow-left fs-4 text-white"></i>
+                        <p class="fs-5 m-0 text-white">Logout</p>
                     </button>
                 </div>
             </div>
-            <div class="col-10 p-0">
+            <div class="col-10 p-0" id="mainArea">
                 <!-- new navbar -->
                 <nav class="rounded-1 m-2 text-white p-2 d-flex justify-content-between align-items-center" id="navbar">
                     <div class="brand">
-                        <a href="" class="navbar-brand text-white ms-2">Good Evening, Username!</a>
+                        <a href="" class="navbar-brand text-white ms-2">Greetings,</a>
+                        <span id="greetings"></span>
                         <button class="navbar-toggler" data-bs-toggle = "collapse" data-bs-target = "#menu">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
+                    <small class="fst-italic text-white">Patient Dashboard</small>  
                     <!-- we need to add navbar collapse -->
                     <div class="navbar-nav">
                         <div class="navbar-item d-flex gap-3">
                             <i class="bi bi-search"></i>
-                            <input type="search" class="rounded-pill border-0 px-3" id="search" placeholder="Search">
+                            <input type="search" class="rounded-pill border-0 px-3" id="searchByDoctorName" placeholder="Search by Doctor">
                         </div>
                     </div>
                 </nav>
                 <!-- Workspace 1 (Dashboard) -->
-                <div id="workspaceDashboard">
+                <div class="workspaceDashboard" >
                     <div class="container-fluid p-4">
-                        <div class="row d-flex-wrap justify-content-center gap-5 ">
-                            <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                        <div class="row d-flex-wrap justify-content-center gap-5 "> 
+                            <button id="visitedCountBtn" value="Visited" class="col-2 btn counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                                <i class="bi bi-geo-alt"></i>
                                 <h5 class="m-0">Visited</h5>
                                 <p class="fw-bold" id="visitedCount"></p>
-                            </div>
-                            <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                            </button>
+                            <button id="appointerCountBtn" value="Appointed" class="col-2 btn counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                                <i class="bi bi-calendar-check"></i>
                                 <h5 class="fs-5">Appointed</h5>
                                 <p class="fw-bold" id="appointedCount"></p>
-                            </div>
-                            <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                            </button>
+                            <button id="requestCountBtn" value="Requested" class="col-2 btn counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                                <i class="bi bi-envelope-check"></i>
                                 <h5 class="fs-5">Requests</h5>
-                                <p class="fw-bold" id="requestedCount"></p>
-                            </div>
-                            <div class="col-2 counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                                <p class="fw-bold" id="requestCount"></p>
+                            </button>
+                            <button id="missedCountBtn" value="Missed" class="col-2 btn counters d-flex justify-content-around rounded-1 pt-2 shadow">
+                                <i class="bi bi-person-x"></i>
                                 <h5 class="fs-5">Missed</h5>
                                 <p class="fw-bold" id="missedCount"></p>
-                            </div>
+                            </button>
                         </div>
                     </div>
-                    <div class="container-fluid bg-light mt-3">
+                    <div class="container-fluid bg-light mt-3" id="allAppointmentDetails">
                         <div class="d-flex justify-content-between  gap-3 p-2">
-                            <h4 class="mx-2 my-2">My Requests</h4>
+                            <h4 class="mx-2 my-2">All Appointment Details</h4>
                             <div class="tools d-flex gap-3">
-                                <!-- <select name="Status" class="">
-                                    <option value="">Filter</option>
-                                    <option value="">Created Date</option>
-                                </select> -->
+                                <nav class="d-flex justify-content-center align-content-center">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a href="" class="page-link">Previous</a></li>
+                                        <li class="page-item"><a href="" class="page-link">1</a></li>
+                                        <li class="page-item"><a href="" class="page-link">2</a></li>
+                                        <li class="page-item"><a href="" class="page-link">3</a></li>
+                                        <li class="page-item"><a href="" class="page-link">Next</a></li>
+                                    </ul>
+                                </nav>
                                 <div class="filters d-flex gap-2">
-                                    <select name="Status" class="form-select">
-                                        <option disabled selected>Choose Status</option>
-                                        <option value="">Visited</option>
-                                        <option value="">Appointed</option>
-                                        <option value="">Missed</option>
-                                        <option value="">Requested</option>
-                                    </select>
-                                    <select name="doctor" class="form-select">
-                                        <option disabled selected>Choose Doctor</option>
-                                        <option value="">Dr. AsokKumar</option>
-                                        <option value="">Dr. David James</option>
-                                        <option value="">Dr. SophiaPrince</option>
-                                    </select>
-                                    <input type="date" class="form-control" name="createdDate">
+                                    <input type="date" class="form-control" name="createdDate" id="createdDateFilter">
                                 </div>
-                                <button class="btn" id="filter" >
-                                    <i class="bi bi-funnel"></i>
-                                </button>
-                                <!-- <button class="btn" id="sort">
-                                    <i class="bi bi-sort-alpha-up" id="ascending"></i>
-                                    <i class="bi bi-sort-alpha-up-alt visually-hidden" id="descending"></i>
-                                </button> -->
                                 <button id="addAppointment" class="btn" data-bs-toggle="modal" data-bs-target="#createAppointmentModal">
                                     <i class="bi bi-plus-square fs-4"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="mb-3 p-3" id="workArea">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>S.no</th>
-                                        <th>Purpose</th>
-                                        <th>Preferred Doctor</th>
-                                        <th>Preferred Date</th>
-                                        <th>Preferred Time</th>
-                                        <th>Status</th>
-                                        <th>Token</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table-content">
-                                </tbody>
-                            </table>
+                            <!-- <h1>hello</h1> -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered z-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Token</th>
+                                            <th>Patient Name</th>
+                                            <th>Patient Age</th>
+                                            <th>Patient Gender</th>
+                                            <th>Purpose</th>
+                                            <th>Doctor Name</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableContent">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="workspaceProfile">
+                <div class="workspaceProfile" >
                     <div class="container">
-                        <h1>Profile</h1>
-                        <div class="profileImages-cont position-relative">
-                            <!-- <img src="/assets/images/background Images/Background-Profile-Image.jpg" class="backgroundProfileImage"> -->
-                        </div>
-                        <div class="rounded-circle position-absolute ms-5 d-flex justify-content-center align-items-center" id="profileImageBorder">
-                            <img src="/assets/images/images/profile/Male_Profile_1.jpg" class="profilePicture rounded-circle">
-                        </div>
-                        <div class="personDetails mt-3 d-flex justify-content-around">
-                            <div class="firstName">
-                                <h5>First Name</h5>
-                                <p>Shawn</p>
-                            </div>
-                            <div class="middleName">
-                                <h5>Middle Name</h5>
-                                <p>Mathew</p>
-                            </div>
-                            <div class="lastName">
-                                <h5>Last Name</h5>
-                                <p>Daniel</p>
+                        <div class="row d-flex p-3 justify-content-center">
+                            <div class="col-10 p-4 bg-light">
+                                <div class="detailsHeader d-flex justify-content-between">
+                                    <h1>PROFILE</h1>
+                                    <button class="btn" id="profileEditBtnContainer"><i class="bi bi-pencil-square fs-3 px-2 align-content-center" id="profileEditBtn"></i></button>
+                                </div>
+                                <div class="row p-3" id="workProfilInnerContaienr">
+                                    <div class="imageContainer col-12 d-flex justify-content-center bg-primary rounded-3">
+                                        <img src="/assets/images/profile pictures/Profile Avatar for Child.svg" class="img-fluid" alt="ProfilePicture"  id="profileImg">
+                                    </div>
+                                    <div class="col-md-6 col-lg-12 details d-flex justify-content-between d-flex-wrap mt-4">
+                                        <div class="firstNameContainer">
+                                            <h4>First Name</h4>
+                                            <input type="text" id="fname" class="profileInput form-control" disabled>
+                                        </div>
+                                        <div class="middleNameContainer">
+                                            <h4>Middle Name</h4>
+                                            <input type="text" id="mname" class="profileInput form-control" disabled>
+                                        </div>
+                                        <div class="lastNameContainer">
+                                            <h4>Last Name</h4>
+                                            <input type="text" id="lname" class="profileInput form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-between d-flex-wrap mt-4">
+                                        <div class="profileAgeContainer">
+                                            <h4>Age</h4>
+                                            <input type="number" disabled class="profileInput form-control" name="" id="profileAge">
+                                        </div>
+                                        <div class="profileGenderContainer mt-4 d-flex gap-1 flex-column">
+                                            <h4>Gender</h4>
+                                            <div class="genderInputs d-flex gap-2" >
+                                                <div class="form-check">
+                                                    <input class="profileInput form-check-input" disabled type="radio" name="gender" id="male">
+                                                    <label class="form-check-label" for="male">Male</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="profileInput form-check-input" disabled type="radio" name="gender" id="female">
+                                                    <label class="form-check-label" for="female">Female</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="profileInput form-check-input" disabled type="radio" name="gender" id="other">
+                                                    <label class="form-check-label" for="other">Other</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="profileEmailIDContainer">
+                                            <h4>EmailID</h4>
+                                            <input type="email" disabled class="profileInput form-control" name="" id="profileEmailID">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-between d-flex-wrap mt-4">
+                                        <div class="profileAgeContainer">
+                                            <h4>Phone Number</h4>
+                                            <input type="number" disabled class="profileInput form-control" name="" id="profilePhoneNumber">
+                                        </div>
+                                        <div class="profileAddressContainer">
+                                            <h4>Address</h4>
+                                            <textarea id="profileAddress" class="profileInput form-control" disabled></textarea>
+                                        </div>
+                                        <div class="profileUsernameContainer">
+                                            <h4>Username</h4>
+                                            <input type="text" disabled class="profileInput form-control" name="" id="profileUsername">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 mt-3  d-flex justify-content-center">
+                                    <button id="profileEditSubmitBtn" class=" btn w-25 text-white bg-primary">Submit</button>
+                                </div> -->
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="workspaceAppointments">
+                    <div class="container-fluid bg-light mt-3" id="myAppointments">
+                        <div class="d-flex justify-content-between  gap-3 p-2">
+                            <h4 class="mx-2 my-2">My Apointments</h4>
+                            <div class="tools d-flex gap-3">
+                                <div class="filters d-flex gap-2">
+                                    <input type="date" class="form-control" name="createdDate" id="createdDateFilter">
+                                </div>
+                                <button id="addAppointment" class="btn" data-bs-toggle="modal" data-bs-target="#createAppointmentModal">
+                                    <i class="bi bi-plus-square fs-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3" id="workArea">
+                            <!-- <h1>hello</h1> -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered z-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Token</th>
+                                            <th>Patient Name</th>
+                                            <th>Patient Age</th>
+                                            <th>Patient Gender</th>
+                                            <th>Purpose</th>
+                                            <th>Doctor Name</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="appointedTableContent">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button class="btn offcanvasBtnContainer" data-bs-target="#sidebar" data>
+                        <i class="bi bi-arrow-right-square fs-3"></i>
+                    </button> -->
+                    <nav class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            <li class="page-item"><a href="" class="page-link">Previous</a></li>
+                            <li class="page-item"><a href="" class="page-link">1</a></li>
+                            <li class="page-item"><a href="" class="page-link">2</a></li>
+                            <li class="page-item"><a href="" class="page-link">3</a></li>
+                            <li class="page-item"><a href="" class="page-link">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="workSpaceRequests">
+                    <div class="container-fluid bg-light mt-3" id="myRequests">
+                        <div class="d-flex justify-content-between  gap-3 p-2">
+                            <h4 class="mx-2 my-2">My Requests</h4>
+                            <div class="tools d-flex gap-3">
+                                <div class="filters d-flex gap-2">
+                                    <input type="date" class="form-control" name="createdDate" id="createdDateFilter">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3" id="workArea">
+                            <!-- <h1>hello</h1> -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered z-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Token</th>
+                                            <th>Patient Name</th>
+                                            <th>Patient Age</th>
+                                            <th>Patient Gender</th>
+                                            <th>Purpose</th>
+                                            <th>Doctor Name</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="requestedTableContent">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
                 </div>
             </div>
         </div>
@@ -290,6 +402,7 @@
                         <p class="errorMsg" id="timeError"></p>
                     </form>
                 </div>
+                
                 <div class="modal-footer">
                     <div class="btn-cont m-3">
                         <button class="btn  text-white" type="button" id="modalEditBtn">Edit Request</button>
@@ -341,6 +454,7 @@
                         <p class="errorMsg" id="timeError"></p>
                     </form>
                 </div>
+                
                 <div class="modal-footer">
                     <div class="btn-cont m-3">
                         <button class="btn  text-white" type="button" id="modalEditBtn">Edit Request</button>

@@ -104,6 +104,7 @@ async function registerPatient(){
     const lastName = $('#lastName').val().trim()
     // const firstName = $('#firstName').val().trim()
     const age = $('#age').val().trim()
+    const gender = $('input[name="gender"]:checked').val();
     const emailID = $('#emailID').val().trim()
     const phoneNumber = $('#phoneNumber').val().trim()
     const address = $('#address').val().trim()
@@ -116,7 +117,7 @@ async function registerPatient(){
         alert("Passowrds do not match")
     }
     else{
-        const patientData = {firstName,middleName,lastName,age,emailID,phoneNumber,address,username,password}
+        const patientData = {firstName,middleName,lastName,age,gender,emailID,phoneNumber,address,username,password}
         console.log(patientData);
         
         await fetch(`${API}/patients`,{

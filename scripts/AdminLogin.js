@@ -49,3 +49,7 @@ $('#adminLoginBtn').click((e)=>{
     e.preventDefault();
     checkUser()
 })
+
+$('#homepageLoginBtn').click(()=>{
+    window.location.href = ""
+})

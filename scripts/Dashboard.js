@@ -4,21 +4,28 @@ const loggedInUser = JSON.parse(
     localStorage.getItem('loggedInUser')
 )
 
+
+
+let currentUserName = loggedInUser.firstName + " " + loggedInUser.middleName +" " +loggedInUser.lastName
+let currentUserAge = loggedInUser.age 
+let currentUserGender = loggedInUser.gender 
+let loggedinID = loggedInUser.id
+console.log(currentUserName);
+
+// console.log(currentUloggedInUser.PatientAge,loggedInUser(PatientGenderser));
 if (!loggedInUser) {
     window.location.replace('/pages/Patientlogin.html')
 }
+
+$('#greetings').text(loggedInUser.firstName)
+
 const today = new Date();
 const now = today.toISOString().split('T')[0];
-// sampleDate = "2026/"
+const createdDate = new Date().toISOString().split('T')[0];
 console.log(now)
 // console.log(today.toLocaleDateString())
 let editID = null;
 let allAppointments=[]
-// $('#search').input("input blur",
-//     allAppointments.forEach(appointment=>{
-//         if($(this).val()== appointment.assigned_doctor)
-//     })
-// )
 
 
 
@@ -54,11 +61,13 @@ async function addAppointment(){
 
         }
         else{
-        
-            const appointment_data = {assigned_doctor,reason,appointment_date,appointment_time,status,isDeleted}
+            
+            
+            
+            const appointment_data = {currentUserName,currentUserAge,currentUserGender,assigned_doctor,reason,appointment_date,appointment_time,status,isDeleted,createdDate}
 
             
-            await fetch(`${API}/appointments`,{
+            await fetch(`${API}/appointments?currentUserName=${currentUserName}`,{
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -76,45 +85,62 @@ async function addAppointment(){
 }
 
 async function getAppointments(){
-    const response = await fetch(`${API}/appointments`)
-    const data =await response.json()
-    showAppointments(data)
+    try{
+        // dobt below
+        // const response = await fetch(`${API}/appointments?_sort=CreatedDate&_order=asc`)
+        const response = await fetch(`${API}/appointments?currentUserName=${currentUserName}`)
+        
+        const data =await response.json()
+        console.log(data);
+        showAppointments(data)
+    }
+    catch(e){
+        console.error(e)
+    }
 }
 
 function showAppointments(data){
-    $('#table-content').empty()
-        data.reverse().forEach(appointments=>{
-            // allAppointments.push(appointments)
-            if(appointments.isDeleted == false){
-                $('#table-content').append(`
-                                <tr>
-                                    <td>1</td>
-                                    <td>${appointments.reason}</td>
-                                    <td>${appointments.assigned_doctor}</td>
-                                    <!-- <td>25th June 2026</td> -->
-                                    <td>${appointments.appointment_date}</td>
-                                    <td>${appointments.appointment_time}</td>
-                                    <!-- <td>${appointments.status}</td> -->
-                                    <td><span class="status">${appointments.status}</span></td>
-                                    <td>${appointments.TokenNumber}</td>
-                                    <td>
-                                        <button id="editBtn" class="btn" onclick="editAppointments('${appointments.id}')">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button id="deleteBtn" class="btn" onclick="deleteAppointments('${appointments.id}')">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                    `)
-            }}
-        )
-        counters();
+    try{
+        
+                        $('#tableContent').empty();
+                        let sno = 1; 
+                        data.forEach(appointments => {
+                            if(!appointments.isDeleted){
+                                $('#tableContent').append(`
+                                    <tr>
+                                        <td>${sno++}</td>
+                                        <td>${appointments.currentUserName}</td>
+                                        <td>${appointments.currentUserAge}</td>
+                                        <td>${appointments.currentUserGender}</td>
+                                        <td>${appointments.reason}</td>
+                                        <td>${appointments.assigned_doctor}</td>
+                                        <!-- <td>25th June 2026</td> -->
+                                        <td>${appointments.appointment_date}</td>
+                                        <td>${appointments.appointment_time}</td>
+                                        <!-- <td>${appointments.status}</td> -->
+                                        <td><span class="status">${appointments.status}</span></td>
+                                        <td>
+                                            <button id="editBtn" class="btn" onclick="editAppointments('${appointments.id}')">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+                                            <button id="deleteBtn" class="btn" onclick="deleteAppointments('${appointments.id}')">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                        `)
+                }
+        })
+            counters();
+    }
+    catch(e){
+        console.error(e)
+    }
 }
 
 // counters function
 async function counters(){
-    const task = await fetch(`${API}/appointments`)
+    const task = await fetch(`${API}/appointments?currentUserName=${currentUserName}`)
     const data = await task.json()  
     console.log(data);
      
@@ -130,10 +156,11 @@ async function counters(){
     const missCount = data.filter(appointments=>
         appointments.status == "Missed" && appointments.isDeleted === false
     ).length
-
+    console.log(data);
+    
     $('#visitedCount').text(visitCount)
     $('#appointedCount').text(appointCount)
-    $('#requestedCount').text(reqCount)
+    $('#requestCount').text(reqCount)
     $('#missedCount').text(missCount)
     
 }
@@ -195,7 +222,7 @@ async function updateAppointments(){
 
 
 async function filterAppointments(){
-    const task = await fetch(`${API}/appointments`)
+    const task = await fetch(`${API}/appointments?currentUserName=${currentUserName}`)
     const data = await task.json()  
     console.log(data);
     data.forEach(values=>{
@@ -221,6 +248,9 @@ async function filterAppointments(){
         $('#table-content').append(`
                                 <tr>
                                     <td>1</td>
+                                    <td>${values.currentUserName}</td>
+                                    <td>${values.currentUserAge}</td>
+                                    <td>${values.currentUserGender}</td>
                                     <td>${values.reason}</td>
                                     <td>${values.assigned_doctor}</td>
                                     <!-- <td>25th June 2026</td> -->
@@ -229,10 +259,10 @@ async function filterAppointments(){
                                     <!-- <td>${values.status}</td> -->
                                     <td><span class="status">${values.status}</span></td>
                                     <td>
-                                        <button id="editBtn" class="btn" onclick="editAppointments('${values.id}')">
+                                        <button id="editBtn" class="btn" onclick="editAppointments('${appointments.id}')">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button id="deleteBtn" class="btn" onclick="deleteAppointments('${values.id}')">
+                                        <button id="deleteBtn" class="btn" onclick="deleteAppointments('${appointments.id}')">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </td>
@@ -241,7 +271,257 @@ async function filterAppointments(){
         sno += 1
     }    
 }
+function showFilters(filters) {
+    console.log(filters);
+    $('#tableContent').empty()
+    
+    filters.forEach(appointments=>{
+                console.log(appointments.currentUserName);
+                
+                
+                $('#tableContent').append(`
+                            <tr>
+                                <td>${appointments.TokenNumber || "-"}</td>
+                                <td>${appointments.currentUserName}</td>
+                                <td>${appointments.currentUserAge}</td>
+                                <td>${appointments.currentUserGender}</td>
+                                <td>${appointments.reason}</td>
+                                <td>${appointments.assigned_doctor}</td>
+                                <!-- <td>25th June 2026</td> -->
+                                <td>${appointments.appointment_date}</td>
+                                <td>${appointments.appointment_time}</td>
+                                <!-- <td>${appointments.status}</td> -->
+                                <td><span class="status">${appointments.status}</span></td>
+                                <td>
+                                    <button id="editBtn" class="btn bg-warning" onclick="editAppointments('${appointments.id}')">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button id="deleteBtn" class="btn bg-danger" onclick="deleteAppointments('${appointments.id}')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                    `)
+                    console.log(appointments);
+                    
+            }
+        )
+        console.log(filters);
 
+}
+
+function showProfileData(data){
+    console.log(data);
+    // $('#tableContent').empty()
+    
+    data.forEach(patient=>{
+                // console.log(patient.TokenNumber);
+                
+                
+                $('#tableContent').append(`
+                            
+                    `)
+                    console.log(appointments);
+                    
+            }
+        )
+        console.log(filters);
+}
+
+async function filterByAppointmentDate(value){
+    console.log(value);
+    const response = await fetch(`${API}/appointments?currentUserName=${currentUserName}&appointment_date_gte=${value}&isDeleted=false`);
+    const data = await response.json();
+    // const filtered = data.filter(appointment => appointment.createdDate >= value);
+
+
+    showFilters(data);
+}
+
+async function filterByStatus(status){
+    console.log(status);
+    
+    const task = await fetch(`${API}/appointments?currentUserName=${currentUserName}&status=${status}&isDeleted=false`)
+    
+    // console.log(status);
+    // console.log(task);
+    const data = await task.json()
+    console.log(task);
+    // data.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    showFilters(data)
+}
+
+async function profileData(){
+    const task = await fetch(`${API}/patients/${loggedinID}`)
+    const data = await task.json()
+    
+    console.log(loggedinID);
+    
+    console.log(data.firstName);
+    
+    $('#fname').val(data.firstName)
+    $('#mname').val(data.middleName)
+    $('#lname').val(data.lastName)
+    $('#profileAge').val(data.age)
+    $('#profileEmailID').val(data.emailID)
+    $('#profilePhoneNumber').val(data.phoneNumber)
+    $('#profileAddress').val(data.address)
+    $('#profileUsername').val(data.username)
+    $('.profileInput').prop("disabled",false)
+}
+async function editProfile(){
+    // const task = await fetch(`${API}/patients?id=${loggedinID}`)
+    // const data = await task.json()
+    const firstName =  $('#fname').val()
+    const middleName = $('#mname').val()
+    const lastName = $('#lname').val()
+    const age = $('#profileAge').val()
+    const emailID = $('#profileEmailID').val()
+    const phoneNumber = $('#profilePhoneNumber').val()
+    const address = $('#profileAddress').val()
+    const username = $('#profileUsername').val()
+
+    const editedData = {firstName,middleName, lastName,age, emailID, phoneNumber,address, username }
+    
+    await fetch(`${API}/patients/${loggedinID}`,{
+        method: "PATCH",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(editedData)
+    })
+    
+    profileData()
+}
+
+
+async function appointedFilter(filters){
+    console.log(filters);
+    $('#tableContent').empty()
+    
+    const task = await fetch(`${API}/appointments?currentUserName=${currentUserName}&status=${filters}&isDeleted=false`)
+    const response = await task.json()
+    console.log(response);
+    response.forEach(appointments=>{
+                console.log(appointments.currentUserName);
+                
+                
+                $('#appointedTableContent').append(`
+                            <tr>
+                                <td>${appointments.TokenNumber}</td>
+                                <td>${appointments.currentUserName}</td>
+                                <td>${appointments.currentUserAge}</td>
+                                <td>${appointments.currentUserGender}</td>
+                                <td>${appointments.reason}</td>
+                                <td>${appointments.assigned_doctor}</td>
+                                <!-- <td>25th June 2026</td> -->
+                                <td>${appointments.appointment_date}</td>
+                                <td>${appointments.appointment_time}</td>
+                                <!-- <td>${appointments.status}</td> -->
+                                <td><span class="status">${appointments.status}</span></td>
+                                <td>
+                                    <button id="editBtn" class="btn bg-warning" onclick="editAppointments('${appointments.id}')">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button id="deleteBtn" class="btn bg-danger" onclick="deleteAppointments('${appointments.id}')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                    `)
+                    console.log(appointments);
+                    
+            }
+        )
+        console.log(response);
+
+    
+}
+
+
+async function requestFilter(filters){
+    console.log(filters);
+    $('#tableContent').empty()
+    
+    const task = await fetch(`${API}/appointments?currentUserName=${currentUserName}&status=${filters}&isDeleted=false`)
+    const response = await task.json()
+    console.log(response);
+    response.forEach(appointments=>{
+                console.log(appointments.currentUserName);
+                
+                
+                $('#requestedTableContent').append(`
+                            <tr>
+                                <td>${appointments.TokenNumber}</td>
+                                <td>${appointments.currentUserName}</td>
+                                <td>${appointments.currentUserAge}</td>
+                                <td>${appointments.currentUserGender}</td>
+                                <td>${appointments.reason}</td>
+                                <td>${appointments.assigned_doctor}</td>
+                                <!-- <td>25th June 2026</td> -->
+                                <td>${appointments.appointment_date}</td>
+                                <td>${appointments.appointment_time}</td>
+                                <!-- <td>${appointments.status}</td> -->
+                                <td><span class="status">${appointments.status}</span></td>
+                                <td>
+                                    <button id="editBtn" class="btn bg-warning" onclick="editAppointments('${appointments.id}')">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button id="deleteBtn" class="btn bg-danger" onclick="deleteAppointments('${appointments.id}')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                    `)
+                    console.log(appointments);
+                    
+            }
+        )
+        console.log(response);
+
+}
+
+$('#profileEditBtnContainer').click(()=>{
+    $('.profileInput').prop("disabled",false)
+    // $('.row').empty("")
+    $('#workProfilInnerContaienr').append(`
+        <div class="col-12 mt-3  d-flex justify-content-center">
+                                    <button id="profileEditSubmitBtn" onclick="editProfile()" class=" btn w-25 text-white bg-primary">Submit</button>
+                                </div>
+        `)
+})
+
+
+$('#createdDateFilter').on('change',function(){
+    const value = $(this).val()    
+    filterByAppointmentDate(value)
+})
+
+$('#searchByDoctorName').on('input',async function(){
+    const value = $(this).val()    
+    const task = await fetch(`${API}/appointments?currentUserName=${currentUserName}&assigned_doctor:startsWith=${value}&isDeleted=false`)
+    const data = await task.json();
+    showFilters(data)
+})
+
+$('#requestCountBtn').click(async function(){
+    let value = $(this).val()
+    console.log(value);
+    filterByStatus(value)
+}
+)
+$('#visitedCountBtn').click(async function(){
+    let value = $(this).val()
+    filterByStatus(value)
+})
+$('#appointerCountBtn').click(async function(){
+    let value = $(this).val()
+    filterByStatus(value)
+})
+$('#missedCountBtn').click(async function(){
+    let value = $(this).val()
+    filterByStatus(value)
+})
 
 $('#modalEditBtn').click(function(e){
     updateAppointments();
@@ -253,18 +533,62 @@ $('#createBtn').click(function(e){
 })
 $('#appointedDate').attr('min',now)
 
-// $('#filter').click(()=>{
-//     filterAppointments()
-// })
-
-$('#filter').click(()=>{
-    $('.filterContents').toggleClass('show')
-})
 
 $('#logoutBtn').click(function () {
     localStorage.clear()
     window.location.replace('/pages/PatientLogin.html');
 
 });
+
+
+$('.dashboard').click(()=>{
+    $('.profile').removeClass('active')
+    $('.dashboard').addClass('active')
+    $(".workSpaceRequests").removeClass('displayDashboardContent')
+    $(".workSpaceRequests").addClass('noDisplayDashboardContent')
+    $(".workspaceProfile").removeClass('displayDashboardContent')
+    $(".workspaceProfile").addClass('noDisplayDashboardContent')
+    $(".workspaceAppointments").removeClass('displayDashboardContent')
+    $(".workspaceAppointments").addClass('noDisplayDashboardContent')
+})
+
+$('.upcomingAppointmentDetails').click(()=>{
+
+    $('.upcomingAppointmentDetails').removeClass('active')
+    $('.upcomingAppointmentDetails').addClass('active')
+    const appointed = "Appointed"
+    appointedFilter(appointed)
+    $(".workspaceDashboard").addClass('noDisplayDashboardContent')
+    $(".workspaceProfile").addClass('noDisplayDashboardContent')
+    $(".workspaceAppointments").addClass('displayDashboardContent')
+})
+$('.request').click(()=>{
+    
+    $('.request').removeClass('active')
+    $('.request').addClass('active')
+    const request = "Requested"
+    requestFilter(request)
+    $(".workspaceDashboard").removeClass('displayDashboardContent')
+    $(".workspaceDashboard").addClass('noDisplayDashboardContent')
+    $(".workspaceProfile").removeClass('displayDashboardContent')
+    $(".workspaceProfile").addClass('noDisplayDashboardContent')
+    $(".workspaceAppointments").removeClass('displayDashboardContent')
+    $(".workspaceAppointments").addClass('noDisplayDashboardContent')
+    // $(".workspaceProfile").addClass('noDisplayDashboardContent')
+    // $(".workspaceAppointments").addClass('noDisplayDashboardContent')
+    $(".workSpaceRequests").addClass('displayDashboardContent')
+})
+$('.profile').click(()=>{
+    
+    $('.dashboard').removeClass('active')
+    // $('.profile').addClass('active')
+    $('.request').removeClass('active')
+    $('.profile').addClass('active')
+    profileData()
+    $(".workspaceDashboard").addClass('noDisplayDashboardContent')
+    $(".workspaceAppointments").addClass('noDisplayDashboardContent')
+    $(".workspaceAppointments").removeClass('noDisplayDashboardContent')
+    $(".workspaceProfile").addClass('displayDashboardContent')
+})
 
 getAppointments()

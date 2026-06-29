@@ -40,15 +40,10 @@ body{
     width: 45px;
     height: 45px;
 }
-#workspaceDashboard{
-    /* display: none; */
-}
-#workspaceProfile{
-    display: none;
-}
-.profilePicture{
-    width: 200px;
-    height: 200px;
+
+#profileImg{
+    width: 200px !important;
+    height: 200px !;
 }
 #profileImageBorder{
     width: 230px;
@@ -72,6 +67,38 @@ body{
     max-width: 200px;
     opacity: 1;
     /* display: block; */
+}
+
+.workspaceAppointments{
+    display: none;
+}
+.workspaceProfile{
+    display: none;
+}
+.workSpaceRequests{
+    display: none ;
+}
+#workArea{
+    height: 425px !important;
+    overflow-y: auto !important;
+    /* overflow-y:hidden; */
+}
+.displayDashboardContent{
+    display: block;
+}
+
+.noDisplayDashboardContent{
+    display: none;
+}
+
+.active{
+    background-color: #61a5ab !important;
+    border: none;
+}
+
+#workProfilInnerContaienr{
+    height: 480px !important;
+    overflow-y: auto !important;
 }
 
 /* Modal Styles */
